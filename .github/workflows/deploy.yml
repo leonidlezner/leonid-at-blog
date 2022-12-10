@@ -27,8 +27,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Upload FTP
-      uses: sebastianpopp/ftp-action@releases/v2
+      - name: Upload FTP
+        uses: sebastianpopp/ftp-action@releases/v2
         with:
           host: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
