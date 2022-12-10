@@ -1,18 +1,29 @@
 ---
-import Settings from "../../settings.json";
-import postsForArea from "../../utils/postsForArea";
+import { filterAndSortPosts, getArea } from "../../utils/postsUtils";
 
 export async function getStaticPaths() {
   const posts: Record<string, any>[] = await Astro.glob(
     "../../posts/**/*.{md,mdx}"
   );
 
-  return Settings.areas.map((area) => {
+  let postsPerArea: Record<string, any[]> = {};
+
+  filterAndSortPosts(posts).forEach((post) => {
+    const area: string = getArea(post.file);
+
+    if (postsPerArea[area] == undefined) {
+      postsPerArea[area] = [];
+    }
+
+    postsPerArea[area].push(post);
+  });
+
+  return Object.keys(postsPerArea).map((area) => {
     return {
-      params: { area: area },
-      props: {
-        posts: postsForArea(posts, area),
+      params: {
+        area: area,
       },
+      props: { posts: postsPerArea[area] },
     };
   });
 }

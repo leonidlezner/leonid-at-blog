@@ -1,22 +1,22 @@
 ---
+import { getArea, filterAndSortPosts } from "../../utils/postsUtils";
+
 export async function getStaticPaths() {
   const posts: Record<string, any>[] = await Astro.glob(
     "../../posts/**/*.{md,mdx}"
   );
 
-  return posts
-    .filter((post) => !post.frontmatter.draft)
-    .map((post) => {
-      const area: string = post.file.match(/\/src\/posts\/([a-z]+)\//)[1];
+  return filterAndSortPosts(posts).map((post) => {
+    const area: string = getArea(post.file);
 
-      return {
-        params: {
-          area: area,
-          slug: post.frontmatter.slug,
-        },
-        props: { post: post },
-      };
-    });
+    return {
+      params: {
+        area: area,
+        slug: post.frontmatter.slug,
+      },
+      props: { post: post },
+    };
+  });
 }
 
 interface Props {

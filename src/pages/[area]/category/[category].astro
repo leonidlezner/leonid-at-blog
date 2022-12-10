@@ -1,0 +1,67 @@
+---
+import { filterAndSortPosts, getArea } from "../../../utils/postsUtils";
+
+export async function getStaticPaths() {
+  const posts: Record<string, any>[] = await Astro.glob(
+    "../../../posts/**/*.{md,mdx}"
+  );
+
+  let results: any[] = [];
+
+  type CategoryPosts = Record<string, any[]>;
+
+  let postsPerArea: Record<string, CategoryPosts> = {};
+
+  // Step 1: Collect all categories for each area
+  filterAndSortPosts(posts).forEach((post) => {
+    const area: string = getArea(post.file);
+
+    if (postsPerArea[area] == undefined) {
+      postsPerArea[area] = {};
+    }
+
+    post.frontmatter.categories?.forEach((category: string) => {
+      if (postsPerArea[area][category] == undefined) {
+        postsPerArea[area][category] = [];
+      }
+
+      postsPerArea[area][category].push(post);
+    });
+  });
+
+  // Step 2: Flatten the array of categories to create path params
+  Object.keys(postsPerArea).forEach((area) => {
+    Object.keys(postsPerArea[area]).forEach((category) => {
+      results.push({
+        params: {
+          area,
+          category,
+        },
+        props: {
+          posts: postsPerArea[area][category],
+        },
+      });
+    });
+  });
+
+  return results;
+}
+
+interface Props {
+  posts: Record<string, any>[];
+}
+
+const { area, category } = Astro.params;
+const { posts } = Astro.props;
+---
+
+{area}
+{category}
+
+{
+  posts.map((post) => (
+    <div>
+      <a href={area + "/" + post.frontmatter.slug}>{post.frontmatter.title}</a>
+    </div>
+  ))
+}
