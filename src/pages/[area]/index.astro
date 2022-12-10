@@ -63,5 +63,6 @@ const { posts, categories } = Astro.props;
   title={Settings.titles[`posts-${area}` as keyof typeof Settings.titles]}
 >
   <List posts={posts} slot="main-column" />
+
   <CategoriesOverview slot="sidebar" categories={categories} area={area} />
 </Listing>

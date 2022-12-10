@@ -1,6 +1,7 @@
 ---
 import ContentContainer from "./ContentContainer.astro";
 import Meta from "./Meta.astro";
+import Headline1 from "./page/Headline1.astro";
 
 interface Props {
   post: any;
@@ -10,9 +11,9 @@ const { post } = Astro.props;
 ---
 
 <article>
-  <h1 class="text-5xl font-bold mb-10 leading-tight">
+  <Headline1>
     {post.frontmatter.title}
-  </h1>
+  </Headline1>
 
   <Meta
     categories={post.frontmatter.categories}

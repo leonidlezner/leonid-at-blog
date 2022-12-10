@@ -75,18 +75,19 @@ interface Props {
 const { area, category } = Astro.params;
 const { posts, categories } = Astro.props;
 
-const categoryTitle: string =
+const categoryHeadline: string =
   Settings.categories[category as keyof typeof Settings.categories] ?? category;
+
+const categoryTitle =
+  categoryHeadline +
+  " in " +
+  Settings.titles[`posts-${area}` as keyof typeof Settings.titles];
 ---
 
-<Listing
-  area={area}
-  title={categoryTitle +
-    " in " +
-    Settings.titles[`posts-${area}` as keyof typeof Settings.titles]}
->
-  <h1 class="mb-12 text-2xl text-center">{categoryTitle}</h1>
+<Listing area={area} title={categoryTitle}>
+  <h1 class="mb-6 sm:mb-12 text-2xl text-center">{categoryHeadline}</h1>
 
   <List posts={posts} slot="main-column" />
+
   <CategoriesOverview slot="sidebar" categories={categories} area={area} />
 </Listing>

@@ -52,7 +52,9 @@ const { title, area } = Astro.props;
   </head>
   <body>
     <Header area={area} />
-    <slot />
+    <div class="min-h-screen">
+      <slot />
+    </div>
     <Footer />
   </body>
 </html>

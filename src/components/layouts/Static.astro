@@ -1,0 +1,23 @@
+---
+import ContentContainer from "../ContentContainer.astro";
+import Headline1 from "../page/Headline1.astro";
+import Single from "./Single.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<Single area="" title={title}>
+  <article>
+    <Headline1>{title}</Headline1>
+
+    <div class="page-inner">
+      <ContentContainer>
+        <slot />
+      </ContentContainer>
+    </div>
+  </article>
+</Single>
