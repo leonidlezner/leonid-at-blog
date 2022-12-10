@@ -15,7 +15,7 @@ export function getArea(path: string): string {
   const area = path.match(/\/src\/posts\/([a-z]+)\//)?.[1];
 
   // Check the white list of areas
-  if (!area || !Settings.areas.includes(area)) {
+  if (area == undefined || !Settings.areas.includes(area)) {
     throw new Error("Area not found in file path");
   } else {
     return area;
@@ -23,8 +23,8 @@ export function getArea(path: string): string {
 }
 
 export function updatePostData(post: any, area: string) {
-  post.frontmatter.url = `/${post.frontmatter.area}/${post.frontmatter.slug}`;
   post.frontmatter.area = area;
+  post.frontmatter.url = `/${area}/${post.frontmatter.slug}`;
   post.frontmatter.excerpt = postExcerpt(post.compiledContent());
   return post;
 }
