@@ -1,0 +1,46 @@
+---
+import Settings from "../../settings.json";
+import postsForArea from "../../utils/postsForArea";
+
+export async function getStaticPaths() {
+  const posts: Record<string, any>[] = await Astro.glob(
+    "../../posts/**/*.{md,mdx}"
+  );
+
+  return Settings.areas.map((area) => {
+    return {
+      params: { area: area },
+      props: {
+        posts: postsForArea(posts, area),
+      },
+    };
+  });
+}
+
+interface Props {
+  posts: Record<string, any>[];
+}
+
+const { area } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    {
+      posts.map((post) => (
+        <div>
+          <a href={area + "/" + post.frontmatter.slug}>
+            {post.frontmatter.title}
+          </a>
+        </div>
+      ))
+    }
+  </body>
+</html>

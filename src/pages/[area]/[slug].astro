@@ -1,0 +1,32 @@
+---
+export async function getStaticPaths() {
+  const posts: Record<string, any>[] = await Astro.glob(
+    "../../posts/**/*.{md,mdx}"
+  );
+
+  return posts
+    .filter((post) => !post.frontmatter.draft)
+    .map((post) => {
+      const area: string = post.file.match(/\/src\/posts\/([a-z]+)\//)[1];
+
+      return {
+        params: {
+          area: area,
+          slug: post.frontmatter.slug,
+        },
+        props: { post: post },
+      };
+    });
+}
+
+interface Props {
+  posts: Record<string, any>[];
+}
+
+const { area } = Astro.params;
+const { post } = Astro.props;
+---
+
+<h1>
+  {post.frontmatter.title}
+</h1>
