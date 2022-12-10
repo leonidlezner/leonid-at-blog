@@ -1,0 +1,41 @@
+---
+import ContentContainer from "./ContentContainer.astro";
+import ContinueReading from "./ContinueReading.astro";
+import Meta from "./Meta.astro";
+
+interface Props {
+  posts: Record<string, any>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="space-y-24">
+  {
+    posts.map((post) => (
+      <article class="relative">
+        <h2 class="text-4xl font-bold mb-7">
+          <a href={post.frontmatter.url}>{post.frontmatter.title}</a>
+        </h2>
+
+        <Meta
+          categories={post.frontmatter.categories}
+          pubDate={post.frontmatter.pubDate}
+          readingTime={post.frontmatter.readingTime}
+          area={post.frontmatter.area}
+        />
+
+        <ContentContainer>
+          {post.frontmatter.excerpt !== undefined && (
+            <div class="z-0 pb-0" set:html={post.frontmatter.excerpt} />
+          )}
+          {post.frontmatter.excerpt === undefined && <post.Content />}
+        </ContentContainer>
+
+        {post.frontmatter.excerpt !== undefined && (
+          <ContinueReading url={post.frontmatter.url} />
+        )}
+      </article>
+    ))
+  }
+</div>

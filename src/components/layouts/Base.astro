@@ -1,0 +1,58 @@
+---
+import Footer from "../page/Footer.astro";
+import Header from "../page/Header.astro";
+import Settings from "../../settings.json";
+
+import "../../styles/index.css";
+
+interface Props {
+  title: string;
+  area?: string;
+}
+
+const { title, area } = Astro.props;
+---
+
+<html lang={Settings.language}>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+
+    <style>
+      @font-face {
+        font-family: "NotoSerif";
+        src: url("/fonts/Noto_Serif/NotoSerif-Regular.ttf") format("truetype");
+        font-weight: normal;
+      }
+
+      @font-face {
+        font-family: "NotoSerif";
+        src: url("/fonts/Noto_Serif/NotoSerif-Bold.ttf") format("truetype");
+        font-weight: 700;
+      }
+
+      @font-face {
+        font-family: "NotoSans";
+        src: url("/fonts/Noto_Sans/NotoSans-Regular.ttf") format("truetype");
+        font-weight: normal;
+      }
+
+      @font-face {
+        font-family: "NotoSans";
+        src: url("/fonts/Noto_Sans/NotoSans-Bold.ttf") format("truetype");
+        font-weight: bold;
+      }
+    </style>
+
+    <title>{title} | {Settings.name}</title>
+  </head>
+  <body>
+    <Header area={area} />
+    <slot />
+    <Footer />
+  </body>
+</html>

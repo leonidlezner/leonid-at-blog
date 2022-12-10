@@ -1,0 +1,27 @@
+---
+import ContentContainer from "./ContentContainer.astro";
+import Meta from "./Meta.astro";
+
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+---
+
+<article>
+  <h2 class="text-4xl font-bold mb-7">
+    <a href={post.frontmatter.url}>{post.frontmatter.title}</a>
+  </h2>
+
+  <Meta
+    categories={post.frontmatter.categories}
+    pubDate={post.frontmatter.pubDate}
+    readingTime={post.frontmatter.readingTime}
+    area={post.frontmatter.area}
+  />
+
+  <ContentContainer>
+    <post.Content />
+  </ContentContainer>
+</article>

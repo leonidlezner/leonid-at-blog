@@ -1,5 +1,11 @@
 ---
-import { getArea, filterAndSortPosts } from "../../utils/postsUtils";
+import Listing from "../../components/layouts/Listing.astro";
+import Post from "../../components/Post.astro";
+import {
+  getArea,
+  filterAndSortPosts,
+  updatePostData,
+} from "../../utils/postsUtils";
 
 export async function getStaticPaths() {
   const posts: Record<string, any>[] = await Astro.glob(
@@ -8,6 +14,8 @@ export async function getStaticPaths() {
 
   return filterAndSortPosts(posts).map((post) => {
     const area: string = getArea(post.file);
+
+    post = updatePostData(post, area);
 
     return {
       params: {
@@ -27,6 +35,6 @@ const { area } = Astro.params;
 const { post } = Astro.props;
 ---
 
-<h1>
-  {post.frontmatter.title}
-</h1>
+<Listing area={area} title={post.frontmatter.title}>
+  <Post post={post} />
+</Listing>

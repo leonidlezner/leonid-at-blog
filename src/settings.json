@@ -1,3 +1,15 @@
 {
-  "areas": ["home", "work"]
+  "areas": ["home", "work"],
+  "language": "de",
+  "name": "Leonid's Blog",
+  "titles": {
+    "posts-home": "Privater Kram",
+    "posts-work": "Irgendwas mit Arbeit"
+  },
+  "categories": {
+    "mobility": "Mobilität",
+    "technology": "Technologie",
+    "one-more": "One More",
+    "category": "KategorieX"
+  }
 }

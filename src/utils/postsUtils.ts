@@ -1,4 +1,5 @@
 import Settings from "../settings.json";
+import postExcerpt from "./post-excerpt";
 
 export function filterAndSortPosts(posts: Record<string, any>[]) {
   return posts
@@ -19,4 +20,11 @@ export function getArea(path: string): string {
   } else {
     return area;
   }
+}
+
+export function updatePostData(post: any, area: string) {
+  post.frontmatter.url = `/${post.frontmatter.area}/${post.frontmatter.slug}`;
+  post.frontmatter.area = area;
+  post.frontmatter.excerpt = postExcerpt(post.compiledContent());
+  return post;
 }

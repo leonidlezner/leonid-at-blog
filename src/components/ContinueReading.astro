@@ -1,0 +1,23 @@
+---
+import ChevronRight from "astro-heroicons/solid/ChevronRight.astro";
+
+interface Props {
+  url: string;
+}
+
+const { url } = Astro.props;
+---
+
+<div
+  class="absolute bottom-1 pt-16 w-full text-center bg-gradient-to-b from-transparent to-white z-10"
+>
+  <a
+    href={url}
+    class="px-16 py-2 bg-white border border-prime hover:bg-prime rounded-full shadow-md inline-flex space-x-3"
+  >
+    <>
+      <div>Weiterlesen</div>
+      <ChevronRight class="w-5" />
+    </>
+  </a>
+</div>

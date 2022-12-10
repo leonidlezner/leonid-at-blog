@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.comma-list {
+    display: inline;
+}
+
+.comma-list li {
+    display: inline-flex;
+}
+
+.comma-list li a {
+    display: block;
+}
+
+.comma-list li::after {
+    content: ',';
+    margin-right: 0.25rem;
+}
+
+.comma-list li:last-child::after {
+    content: '';
+    margin-right: 0;
+}

@@ -1,0 +1,26 @@
+---
+import Settings from "../settings.json";
+
+interface Props {
+  categories: string[];
+  area: string;
+}
+
+const { categories, area } = Astro.props;
+---
+
+<ul class="comma-list">
+  {
+    categories.map((category: string) => (
+      <li>
+        <a
+          href={"/" + area + "/category/" + category}
+          class="border-b border-prime -mb-[1px] text-gray-600 hover:bg-prime"
+        >
+          {Settings.categories[category as keyof typeof Settings.categories] ??
+            category}
+        </a>
+      </li>
+    ))
+  }
+</ul>
