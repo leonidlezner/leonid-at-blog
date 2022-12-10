@@ -27,6 +27,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: List files
+        run: |
+          ls -la
       - name: Upload FTP
         uses: sebastianpopp/ftp-action@releases/v2
         with:
