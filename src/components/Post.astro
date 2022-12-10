@@ -10,9 +10,9 @@ const { post } = Astro.props;
 ---
 
 <article>
-  <h2 class="text-4xl font-bold mb-7">
-    <a href={post.frontmatter.url}>{post.frontmatter.title}</a>
-  </h2>
+  <h1 class="text-5xl font-bold mb-10 leading-tight">
+    {post.frontmatter.title}
+  </h1>
 
   <Meta
     categories={post.frontmatter.categories}

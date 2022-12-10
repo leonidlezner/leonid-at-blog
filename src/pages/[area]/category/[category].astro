@@ -7,6 +7,7 @@ import {
   updatePostData,
 } from "../../../utils/postsUtils";
 import Settings from "../../../settings.json";
+import CategoriesOverview from "../../../components/CategoriesOverview.astro";
 
 export async function getStaticPaths() {
   const posts: Record<string, any>[] = await Astro.glob(
@@ -17,6 +18,7 @@ export async function getStaticPaths() {
 
   type CategoryPosts = Record<string, any[]>;
 
+  let categoriesPerArea: Record<string, string[]> = {};
   let postsPerArea: Record<string, CategoryPosts> = {};
 
   // Step 1: Collect all categories for each area
@@ -29,12 +31,20 @@ export async function getStaticPaths() {
       postsPerArea[area] = {};
     }
 
+    if (categoriesPerArea[area] == undefined) {
+      categoriesPerArea[area] = [];
+    }
+
     post.frontmatter.categories?.forEach((category: string) => {
       if (postsPerArea[area][category] == undefined) {
         postsPerArea[area][category] = [];
       }
 
       postsPerArea[area][category].push(post);
+
+      if (!categoriesPerArea[area].includes(category)) {
+        categoriesPerArea[area].push(category);
+      }
     });
   });
 
@@ -48,6 +58,7 @@ export async function getStaticPaths() {
         },
         props: {
           posts: postsPerArea[area][category],
+          categories: categoriesPerArea[area],
         },
       });
     });
@@ -58,10 +69,11 @@ export async function getStaticPaths() {
 
 interface Props {
   posts: Record<string, any>[];
+  categories: string[];
 }
 
 const { area, category } = Astro.params;
-const { posts } = Astro.props;
+const { posts, categories } = Astro.props;
 
 const categoryTitle: string =
   Settings.categories[category as keyof typeof Settings.categories] ?? category;
@@ -73,5 +85,8 @@ const categoryTitle: string =
     " in " +
     Settings.titles[`posts-${area}` as keyof typeof Settings.titles]}
 >
-  <List posts={posts} />
+  <h1 class="mb-12 text-2xl text-center">{categoryTitle}</h1>
+
+  <List posts={posts} slot="main-column" />
+  <CategoriesOverview slot="sidebar" categories={categories} area={area} />
 </Listing>

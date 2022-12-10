@@ -1,5 +1,5 @@
 ---
-import Listing from "../../components/layouts/Listing.astro";
+import Single from "../../components/layouts/Single.astro";
 import Post from "../../components/Post.astro";
 import {
   getArea,
@@ -35,6 +35,6 @@ const { area } = Astro.params;
 const { post } = Astro.props;
 ---
 
-<Listing area={area} title={post.frontmatter.title}>
+<Single area={area} title={post.frontmatter.title}>
   <Post post={post} />
-</Listing>
+</Single>

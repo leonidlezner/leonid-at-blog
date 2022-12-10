@@ -1,11 +1,10 @@
 ---
 import Categories from "./Categories.astro";
-import DateString from "./DateString.astro";
 import Newspaper from "astro-heroicons/outline/Newspaper.astro";
 import Clock from "astro-heroicons/outline/Clock.astro";
 
 interface Props {
-  pubDate: string | undefined;
+  pubDate: string;
   categories: string[];
   readingTime: number;
   area: string;
@@ -18,15 +17,15 @@ const { categories, pubDate, readingTime, area } = Astro.props;
   <div class="flex-1 flex flex-wrap items-center">
     <Newspaper class="w-5 h-5 mr-1" />
     <div class="mr-1">Gepostet</div>
+    <div class="mr-1">am {new Date(pubDate).toLocaleDateString("de-DE")}</div>
     {
       categories && (
-        <div class="mr-1">
+        <div>
           in
           <Categories categories={categories} area={area} />
         </div>
       )
     }
-    {pubDate && <DateString date={new Date(pubDate)} />}
   </div>
   <div class="flex items-center space-x-1">
     <Clock class="w-5 h-5" />
