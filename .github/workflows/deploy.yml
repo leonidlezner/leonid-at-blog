@@ -1,32 +1,24 @@
 name: Build Astro and Upload to FTP
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
-  # Using a different branch name? Replace `main` with your branch’s name
   push:
     branches: [main]
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
-# Allow this job to clone the repo and create a page deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v2
-      - name: Install, build, and upload your site
-        uses: withastro/action@v0
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+      - name: Use Node.js 19
+        uses: actions/setup-node@v2
+        with:
+          node-version: "19"
+      - name: Build Project
+        run: |
+          npm install
+          npm run build
       - name: List files
         run: |
           ls -la
@@ -36,4 +28,4 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          serverDir: "www"
+          server-dir: "www"
