@@ -85,7 +85,9 @@ const categoryTitle =
 ---
 
 <Listing area={area} title={categoryTitle}>
-  <h1 class="mb-6 sm:mb-12 text-2xl text-center">{categoryHeadline}</h1>
+  <h1 class="mb-6 sm:mb-12 text-2xl text-center work:text-gray-300">
+    {categoryHeadline}
+  </h1>
 
   <List posts={posts} slot="main-column" />
 

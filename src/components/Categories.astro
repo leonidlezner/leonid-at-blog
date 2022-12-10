@@ -15,7 +15,7 @@ const { categories, area } = Astro.props;
       <li>
         <a
           href={"/" + area + "/category/" + category}
-          class="border-b border-prime -mb-[1px] text-gray-600 hover:bg-prime"
+          class="border-b border-prime work:border-second -mb-[1px] text-gray-600 work:text-gray-400 hover:bg-prime hover:work:bg-second hover:work:text-gray-800"
         >
           {Settings.categories[category as keyof typeof Settings.categories] ??
             category}

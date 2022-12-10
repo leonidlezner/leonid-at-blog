@@ -13,7 +13,7 @@ interface Props {
 const { title, area } = Astro.props;
 ---
 
-<html lang={Settings.language}>
+<html lang={Settings.language} class={area}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
@@ -50,7 +50,7 @@ const { title, area } = Astro.props;
 
     <title>{title} | {Settings.name}</title>
   </head>
-  <body>
+  <body class="work:bg-gray-800">
     <Header area={area} />
     <div class="min-h-screen">
       <slot />

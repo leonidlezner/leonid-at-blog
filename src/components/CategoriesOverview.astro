@@ -10,7 +10,7 @@ const { categories, area } = Astro.props;
 ---
 
 <div>
-  <h2 class="text-xl font-semibold mb-5">Kategorien</h2>
+  <h2 class="text-xl font-semibold mb-5 work:text-gray-400">Kategorien</h2>
 
   <ul class="space-y-2">
     {
@@ -18,7 +18,7 @@ const { categories, area } = Astro.props;
         <li>
           <a
             href={"/" + area + "/category/" + category}
-            class="border-b-2 border-prime -mb-[2px] hover:bg-prime"
+            class="border-b-2 border-prime work:border-second -mb-[2px] hover:bg-prime hover:work:bg-second hover:work:text-gray-800 work:text-gray-300"
           >
             {Settings.categories[
               category as keyof typeof Settings.categories
