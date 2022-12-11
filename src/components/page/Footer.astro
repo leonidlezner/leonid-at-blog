@@ -1,13 +1,46 @@
 ---
+import ArrowTopRightOnSquare from "astro-heroicons/solid/ArrowTopRightOnSquare.astro";
+import FooterButton from "./FooterButton.astro";
 ---
 
-<footer class="bg-black py-10 text-gray-500 text-center mt-20">
-  <div>Copyright &copy; Leonid Lezner</div>
+<footer
+  class="bg-gray-200 work:bg-gray-900 py-10 text-gray-500 text-center mt-20"
+>
+  <div
+    class="max-w-6xl px-5 sm:flex items-center mx-auto justify-between space-y-4 sm:space-y-0"
+  >
+    <div>&copy; 2022 Leonid Lezner</div>
 
-  <ul class="flex justify-center space-x-2 mt-2">
-    <li><a href="/imprint" class="underline hover:text-white">Impressum</a></li>
-    <li>
-      <a href="/privacy" class="underline hover:text-white">Datenschutz</a>
-    </li>
-  </ul>
+    <ul class="flex justify-center space-x-2">
+      <li>
+        <a
+          href="/imprint"
+          class="underline hover:work:text-white hover:text-gray-800"
+          >Impressum</a
+        >
+      </li>
+      <li>
+        <a
+          href="/privacy"
+          class="underline hover:work:text-white hover:text-gray-800"
+          >Datenschutz</a
+        >
+      </li>
+    </ul>
+
+    <ul class="flex justify-center space-x-2">
+      <li>
+        <FooterButton href="https://norden.social/@leonid">
+          Mastodon
+          <ArrowTopRightOnSquare slot="icon" class="w-4 h-4" />
+        </FooterButton>
+      </li>
+      <li>
+        <FooterButton href="http://twitter.com/leonidlezner">
+          Twitter
+          <ArrowTopRightOnSquare slot="icon" class="w-4 h-4" />
+        </FooterButton>
+      </li>
+    </ul>
+  </div>
 </footer>

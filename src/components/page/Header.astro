@@ -1,2 +1,49 @@
 ---
+import Settings from "../../settings.json";
+import ArrowRightCircle from "astro-heroicons/solid/ArrowRightCircle.astro";
+
+interface Props {
+  area?: string;
+}
+const { area = "" } = Astro.props;
+
+let switchLink: { href: string; text: string };
+
+if (area === "home") {
+  switchLink = {
+    href: "/work",
+    text: "Work",
+  };
+} else {
+  switchLink = {
+    href: "/home",
+    text: "Home",
+  };
+}
 ---
+
+<header class="work:bg-second bg-prime sm:mb-20">
+  <div class="max-w-6xl flex items-center mx-auto px-5 justify-between">
+    <div class="font-serif my-4 flex justify-center">
+      <a href={"/" + area}>
+        <div class="flex items-center space-x-3 work:text-gray-800">
+          <img src="/images/logo-simple.svg" class="w-10 h-10" />
+          <div class="text-sm">
+            <div class="font-bold">{Settings.name}</div>
+            {area === "home" && <div>{Settings.titles["posts-home"]}</div>}
+            {area === "work" && <div>{Settings.titles["posts-work"]}</div>}
+          </div>
+        </div>
+      </a>
+    </div>
+    <div>
+      <a
+        class="inline-flex rounded-full bg-white hover:bg-gray-50 work:bg-gray-800 hover:work:bg-gray-700 px-10 py-2 space-x-2 items-center work:text-gray-200"
+        href={switchLink.href}
+        ><span>{switchLink.text}</span><ArrowRightCircle
+          class="w-5 h-5 text-prime work:text-second"
+        />
+      </a>
+    </div>
+  </div>
+</header>
