@@ -9,4 +9,5 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkReadingTime],
   },
+  trailingSlash: "never",
 });

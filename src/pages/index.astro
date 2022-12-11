@@ -2,36 +2,71 @@
 import Page from "../components/layouts/Page.astro";
 import Settings from "../settings.json";
 import ArrowRightCircle from "astro-heroicons/solid/ArrowRightCircle.astro";
+import {
+  filterAndSortPosts,
+  getArea,
+  updatePostData,
+} from "../utils/postsUtils";
+import SmallList from "../components/SmallList.astro";
+import Header from "../components/page/Header.astro";
+import Footer from "../components/page/Footer.astro";
+
+const posts: Record<string, any>[] = await Astro.glob("../posts/**/*.{md,mdx}");
+
+let postsPerArea: Record<string, any[]> = {};
+
+filterAndSortPosts(posts).forEach((post) => {
+  const area: string = getArea(post.file);
+
+  post = updatePostData(post, area);
+
+  if (postsPerArea[area] == undefined) {
+    postsPerArea[area] = [];
+  }
+
+  postsPerArea[area].push(post);
+  postsPerArea[area].push(post);
+  postsPerArea[area].push(post);
+  postsPerArea[area].push(post);
+});
 ---
 
 <Page title={Settings.name}>
-  <div class="absolute w-40 h-40 left-1/2 -ml-20 top-20 text-center">
+  <!--  <div class="absolute w-40 h-40 left-1/2 -ml-20 top-20 text-center">
     <img src="/images/logo-simple.svg" class="w-32 h-32 inline-block" />
     <h1 class="mt-5 text-3xl font-bold font-serif">
       {Settings.name}
     </h1>
-  </div>
+  </div> -->
 
-  <div class="flex min-h-screen overflow-hidden">
-    <div class="w-1/2 bg-gray-800 flex">
-      <div class="flex-1 text-center">
-        <a
-          href="/work"
-          class="p-5 bg-second px-10 rounded-full text-2xl inline-flex items-center mt-48 space-x-3 border-2 border-transparent hover:border-second hover:bg-gray-800 hover:text-second"
-          ><span>Work</span><ArrowRightCircle class="w-7 h-7" />
-        </a>
+  <div class="sm:flex sm:min-h-screen overflow-hidden">
+    <div class="work bg-gray-800 sm:w-1/2 flex">
+      <div class="flex-1">
+        <Header area="work" showSwitch={false} name="Leonid.at/Work" />
+        <div class="p-5 sm:p-10">
+          <SmallList posts={postsPerArea["work"]} />
+        </div>
       </div>
-      <div class="w-24 bg-second h-full inline-block"></div>
     </div>
-    <div class="w-1/2 flex">
-      <div class="w-24 bg-prime h-full inline-block"></div>
-      <div class="flex-1 text-center">
-        <a
-          href="/home"
-          class="p-5 bg-prime px-10 rounded-full text-2xl inline-flex items-center mt-48 space-x-3 border-2 border-transparent hover:border-prime hover:bg-white hover:text-prime"
-          ><span>Home</span><ArrowRightCircle class="w-7 h-7" />
-        </a>
+    <div class="sm:w-1/2 flex">
+      <div class="flex-1">
+        <Header area="home" showSwitch={false} name="Leonid.at/Home" />
+        <div class="p-5 sm:p-10">
+          <SmallList posts={postsPerArea["home"]} />
+        </div>
       </div>
     </div>
   </div>
 </Page>
+
+<!-- <a
+          href="/work"
+          class="p-5 bg-second px-10 rounded-full text-2xl inline-flex items-center space-x-3 border-2 border-transparent hover:border-second hover:bg-gray-800 hover:text-second"
+          ><span>Leonid at work</span><ArrowRightCircle class="w-7 h-7" />
+        </a> -->
+
+<!-- <a
+          href="/home"
+          class="p-5 bg-prime px-10 rounded-full text-2xl inline-flex items-center space-x-3 border-2 border-transparent hover:border-prime hover:bg-white hover:text-prime"
+          ><span>Leonid at home</span><ArrowRightCircle class="w-7 h-7" />
+        </a> -->

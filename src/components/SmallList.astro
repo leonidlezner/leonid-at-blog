@@ -1,0 +1,31 @@
+---
+interface Props {
+  posts: Record<string, any>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<h2 class="text-xl font-semibold mb-5 work:text-gray-400">
+  Die letzten Beiträge
+</h2>
+
+<ul class="divide-y divide-solid divide-gray-200 work:divide-gray-700">
+  {
+    posts.map((post) => (
+      <li>
+        <a
+          href={post.frontmatter.url}
+          class="flex space-x-5 py-2 hover:bg-prime hover:work:bg-second hover:work:text-gray-800 group"
+        >
+          <div class="text-gray-600 work:text-gray-400 work:group-hover:text-gray-500">
+            {new Date(post.frontmatter.pubDate).toLocaleDateString("de-DE")}
+          </div>
+          <div class="work:text-gray-300 work:group-hover:text-gray-800">
+            {post.frontmatter.title}
+          </div>
+        </a>
+      </li>
+    ))
+  }
+</ul>

@@ -26,5 +26,18 @@ export function updatePostData(post: any, area: string) {
   post.frontmatter.area = area;
   post.frontmatter.url = `/${area}/${post.frontmatter.slug}`;
   post.frontmatter.excerpt = postExcerpt(post.compiledContent());
+
+  if (post.frontmatter.pubDate == undefined) {
+    throw new Error("Post has no pubDate: " + post.file);
+  }
+
+  if (post.frontmatter.slug == undefined) {
+    throw new Error("Post has no slug: " + post.file);
+  }
+
+  if (post.frontmatter.title == undefined) {
+    throw new Error("Post has no title: " + post.file);
+  }
+
   return post;
 }
