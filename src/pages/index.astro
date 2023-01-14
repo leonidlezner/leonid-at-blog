@@ -1,7 +1,6 @@
 ---
 import Page from "../components/layouts/Page.astro";
 import Settings from "../settings.json";
-import ArrowRightCircle from "astro-heroicons/solid/ArrowRightCircle.astro";
 import {
   filterAndSortPosts,
   getArea,
@@ -9,7 +8,6 @@ import {
 } from "../utils/postsUtils";
 import SmallList from "../components/SmallList.astro";
 import Header from "../components/page/Header.astro";
-import Footer from "../components/page/Footer.astro";
 
 const posts: Record<string, any>[] = await Astro.glob("../posts/**/*.{md,mdx}");
 
