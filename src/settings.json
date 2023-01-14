@@ -2,6 +2,7 @@
   "areas": ["home", "work"],
   "language": "de",
   "name": "Leonid's Blog",
+  "description": "Blog über Themen aus Leonids Arbeit und seinem Privatleben",
   "titles": {
     "posts-home": "Leonid.at/Home",
     "posts-work": "Leonid.at/Work"
