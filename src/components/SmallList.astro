@@ -18,10 +18,10 @@ const { posts } = Astro.props;
           href={post.frontmatter.url}
           class="flex space-x-5 py-2 hover:bg-prime hover:work:bg-second hover:work:text-gray-800 group"
         >
-          <div class="text-gray-600 work:text-gray-400 work:group-hover:text-gray-500">
+          <div class="text-gray-600 work:text-gray-400 work:group-hover:text-gray-500 w-32">
             {new Date(post.frontmatter.pubDate).toLocaleDateString("de-DE")}
           </div>
-          <div class="work:text-gray-300 work:group-hover:text-gray-800">
+          <div class="work:text-gray-300 work:group-hover:text-gray-800 flex-1">
             {post.frontmatter.title}
           </div>
         </a>
