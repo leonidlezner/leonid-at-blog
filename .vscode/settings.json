@@ -1,5 +1,8 @@
 {
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "cSpell.language": "en,de-DE"
+  "cSpell.language": "en,de-DE",
+  "files.associations": {
+    "*.mdx": "markdown"
+  }
 }
