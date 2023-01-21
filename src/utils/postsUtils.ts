@@ -1,5 +1,6 @@
 import Settings from "../settings.json";
 import postExcerpt from "./post-excerpt";
+import sanitizeHtml from "sanitize-html";
 
 export function filterAndSortPosts(posts: Record<string, any>[]) {
   return posts
@@ -26,6 +27,9 @@ export function updatePostData(post: any, area: string) {
   post.frontmatter.area = area;
   post.frontmatter.url = `/${area}/${post.frontmatter.slug}`;
   post.frontmatter.excerpt = postExcerpt(post.compiledContent());
+  post.frontmatter.description = sanitizeHtml(post.frontmatter.excerpt, {
+    allowedTags: [],
+  });
 
   if (post.frontmatter.pubDate == undefined) {
     throw new Error("Post has no pubDate: " + post.file);

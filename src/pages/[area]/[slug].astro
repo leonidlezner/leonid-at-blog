@@ -35,6 +35,10 @@ const { area } = Astro.params;
 const { post } = Astro.props;
 ---
 
-<Single area={area} title={post.frontmatter.title}>
+<Single
+  area={area}
+  title={post.frontmatter.title}
+  description={post.frontmatter.description}
+>
   <Post post={post} />
 </Single>

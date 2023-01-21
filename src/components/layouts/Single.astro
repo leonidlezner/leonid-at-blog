@@ -4,12 +4,13 @@ import Base from "../layouts/Base.astro";
 interface Props {
   title: string;
   area?: string;
+  description?: string;
 }
 
-const { title, area } = Astro.props;
+const { title, area, description } = Astro.props;
 ---
 
-<Base title={title} area={area}>
+<Base title={title} area={area} description={description}>
   <div class="container mx-auto max-w-4xl my-20 px-5">
     <slot />
   </div>

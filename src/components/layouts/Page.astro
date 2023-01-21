@@ -7,9 +7,11 @@ interface Props {
   title: string;
   area?: string;
   className?: string;
+  metaTitle: string;
+  metaDescription?: string;
 }
 
-const { title, area, className } = Astro.props;
+const { title, area, className, metaTitle, metaDescription } = Astro.props;
 ---
 
 <html lang={Settings.language} class={area}>
@@ -18,6 +20,13 @@ const { title, area, className } = Astro.props;
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+
+    <meta property="og:title" content={metaTitle} />
+    {
+      metaDescription != undefined && (
+        <meta property="og:description" content={metaDescription} />
+      )
+    }
 
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />

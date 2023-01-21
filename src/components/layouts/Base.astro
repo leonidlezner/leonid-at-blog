@@ -9,15 +9,18 @@ import Page from "./Page.astro";
 interface Props {
   title: string;
   area?: string;
+  description?: string;
 }
 
-const { title, area } = Astro.props;
+const { title, area, description } = Astro.props;
 ---
 
 <Page
   title={title + " | " + Settings.name}
   area={area}
   className="work:bg-gray-800"
+  metaTitle={title}
+  metaDescription={description}
 >
   <Header area={area} />
   <div class="min-h-screen">
