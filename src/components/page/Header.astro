@@ -39,8 +39,10 @@ if (showSwitch) {
 ---
 
 <header class="work:bg-second bg-prime">
-  <div class="max-w-6xl flex items-center mx-auto px-5 justify-between">
-    <div class="font-serif my-4 flex justify-center">
+  <div
+    class="max-w-6xl sm:flex items-center mx-auto sm:px-5 py-4 sm:py-0 space-y-4 sm:space-y-0 justify-between"
+  >
+    <div class="font-serif sm:my-4 flex justify-center">
       <a href={"/" + area}>
         <div class="flex items-center space-x-3 work:text-gray-800">
           <img src="/images/logo-simple.svg" class="w-10 h-10" />
@@ -52,7 +54,7 @@ if (showSwitch) {
         </div>
       </a>
     </div>
-    <div>
+    <div class="text-center sm:text-left">
       <a
         class="inline-flex rounded-full bg-white hover:bg-gray-50 work:bg-gray-800 hover:work:bg-gray-700 px-7 py-2 space-x-2 items-center work:text-gray-200"
         href={switchLink.href}
